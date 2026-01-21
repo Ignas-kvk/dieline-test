@@ -1,0 +1,18 @@
+:root { font-family: system-ui, Arial, sans-serif; }
+body { margin: 0; background: #0b0b0c; color: #f2f2f2; }
+.container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+.row { display: grid; grid-template-columns: 420px 1fr; gap: 16px; align-items: start; }
+.card { background: #151517; border: 1px solid #2a2a2f; border-radius: 12px; padding: 14px; }
+h1 { font-size: 18px; margin: 0 0 12px; }
+label { display:block; font-size: 12px; opacity: .85; margin-bottom: 6px; }
+input, select, button { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #2a2a2f; background:#0f0f12; color:#f2f2f2; }
+button { cursor: pointer; background:#2b6cff; border:none; font-weight: 600; }
+button:disabled { opacity: .6; cursor: not-allowed; }
+.small { font-size: 12px; opacity: .85; }
+hr { border: none; border-top: 1px solid #2a2a2f; margin: 12px 0; }
+
+.canvasWrap { position: relative; display: inline-block; background: #0f0f12; border-radius: 12px; border: 1px solid #2a2a2f; overflow: hidden; }
+.overlay { position: absolute; inset: 0; cursor: crosshair; }
+.cropBox { position: absolute; border: 2px solid #2b6cff; background: rgba(43,108,255,0.15); pointer-events: none; }
+.pickerDot { position:absolute; width:10px; height:10px; border-radius: 50%; border:2px solid #fff; pointer-events:none; transform: translate(-50%, -50%); }
+.badge { display:inline-block; padding: 3px 8px; background:#232329; border:1px solid #2a2a2f; border-radius: 999px; font-size: 12px; margin-right: 6px; }
