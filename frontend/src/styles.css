@@ -1,18 +1,96 @@
-:root { font-family: system-ui, Arial, sans-serif; }
-body { margin: 0; background: #0b0b0c; color: #f2f2f2; }
+:root {
+  font-family: system-ui, Arial, sans-serif;
+  --bg: #0b0b0c;
+  --text: #f2f2f2;
+  --card-bg: #151517;
+  --border: #2a2a2f;
+  --input-bg: #0f0f12;
+  --button-bg: #2b6cff;
+  --button-text: #ffffff;
+  --muted-bg: #232329;
+  --overlay-border: #2b6cff;
+  --overlay-fill: rgba(43,108,255,0.15);
+  --preview-bg: #ffffff;
+}
+
+:root[data-theme="light"] {
+  --bg: #f5f7fb;
+  --text: #17181c;
+  --card-bg: #ffffff;
+  --border: #d7dce5;
+  --input-bg: #ffffff;
+  --button-bg: #2b6cff;
+  --button-text: #ffffff;
+  --muted-bg: #eef2f8;
+  --overlay-border: #2b6cff;
+  --overlay-fill: rgba(43,108,255,0.12);
+  --preview-bg: #ffffff;
+}
+
+body { margin: 0; background: var(--bg); color: var(--text); transition: background 0.2s ease, color 0.2s ease; }
 .container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+.topBar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
 .row { display: grid; grid-template-columns: 420px 1fr; gap: 16px; align-items: start; }
-.card { background: #151517; border: 1px solid #2a2a2f; border-radius: 12px; padding: 14px; }
-h1 { font-size: 18px; margin: 0 0 12px; }
+.card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px; transition: background 0.2s ease, border-color 0.2s ease; }
+h1 { font-size: 18px; margin: 0; }
 label { display:block; font-size: 12px; opacity: .85; margin-bottom: 6px; }
-input, select, button { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #2a2a2f; background:#0f0f12; color:#f2f2f2; }
-button { cursor: pointer; background:#2b6cff; border:none; font-weight: 600; }
+input, select, button { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--input-bg); color: var(--text); transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+button { cursor: pointer; background: var(--button-bg); border: none; font-weight: 600; color: var(--button-text); }
 button:disabled { opacity: .6; cursor: not-allowed; }
 .small { font-size: 12px; opacity: .85; }
-hr { border: none; border-top: 1px solid #2a2a2f; margin: 12px 0; }
+hr { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
+.themeToggle { width: auto; min-width: 180px; padding: 10px 14px; }
 
-.canvasWrap { position: relative; display: inline-block; background: #0f0f12; border-radius: 12px; border: 1px solid #2a2a2f; overflow: hidden; }
+.canvasWrap { position: relative; display: inline-block; background: var(--input-bg); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; transition: background 0.2s ease, border-color 0.2s ease; }
 .overlay { position: absolute; inset: 0; cursor: crosshair; }
-.cropBox { position: absolute; border: 2px solid #2b6cff; background: rgba(43,108,255,0.15); pointer-events: none; }
+.cropBox { position: absolute; border: 2px solid var(--overlay-border); background: var(--overlay-fill); pointer-events: none; }
 .pickerDot { position:absolute; width:10px; height:10px; border-radius: 50%; border:2px solid #fff; pointer-events:none; transform: translate(-50%, -50%); }
-.badge { display:inline-block; padding: 3px 8px; background:#232329; border:1px solid #2a2a2f; border-radius: 999px; font-size: 12px; margin-right: 6px; }
+.badge { display:inline-block; padding: 3px 8px; background: var(--muted-bg); border:1px solid var(--border); border-radius: 999px; font-size: 12px; margin-right: 6px; }
+.topButtons {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  z-index: 999;
+}
+
+.lang-toggle,
+.theme-toggle {
+  width: auto;
+  min-width: 44px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-weight: 600;
+  background: var(--card-bg);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.picker-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.picker-btn {
+  width: 100%;
+  background: var(--input-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.picker-btn.active {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--button-bg);
+}
+@media (max-width: 900px) {
+  .row { grid-template-columns: 1fr; }
+  .topBar { flex-direction: column; align-items: stretch; }
+  .themeToggle { width: 100%; min-width: 0; }
+}
